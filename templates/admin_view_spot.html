@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Spot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">EDIT PARKING SPOT!</div>
+    <div class="header-right">
+      <a href="{{ url_for('admin_home') }}">← BACK TO DASHBOARD</a>
+    </div>
+  </div>
+
+  <div class="signup-box">
+    <form method="POST">
+      <div class="mb-3">
+        <label for="spot_number">Spot Number:</label>
+        <input type="text" class="form-control" id="spot_number" value="{{ spot.spot_number }}" disabled>
+      </div>
+
+      <div class="mb-3">
+        <label for="status">STATUS:</label>
+        <input type="text" id="status" class="form-control" value="{{ spot.status }}" disabled>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        {% if spot.status == 'A' %}
+          <button type="submit" name="delete" class="btn btn-danger">DELETE</button>
+        {% else %}
+          <button type="button" class="btn btn-show-details" disabled>DELETE</button>
+        {% endif %}
+
+      <button type="submit" name="see_details" class="btn btn-success">SEE DETAILS</button>
+    </form>
+  </div>
+
+</body>
+</html>

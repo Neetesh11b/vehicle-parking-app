@@ -1,0 +1,47 @@
+ body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .header {
+      background-color: #1c1414;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      text-shadow: 3px 3px 0px black;
+    }
+
+    .section {
+      background-color: #a65489;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-decoration: underline;
+    }
+
+    .btn-custom {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: black;
+      background-color: brown;
+      border: none;
+      border-bottom: 3px solid #042530;
+      margin: 0 30px;
+      padding: 10px 30px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-custom:hover {
+      background-color: #ffffff20;
+      transform: scale(1.05);
+      color: white;
+    }
+  

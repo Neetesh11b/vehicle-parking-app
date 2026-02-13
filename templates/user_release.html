@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Release Parking Spot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+</head>
+<body>
+
+  {% if booking %}
+    <p>Booking ID: {{ booking.id }}</p>
+    {% if booking.spot %}
+      <p>Spot ID: {{ booking.spot.id }}</p>
+      {% if booking.spot.parking %}
+        <p>Parking price: {{ booking.spot.parking.price }}</p>
+      {% endif %}
+    {% endif %}
+  {% else %}
+    <p>No booking found</p>
+  {% endif %}
+
+  <div class="header">
+    <div class="header-left">WANT TO RELEASE THE PARKING SPOT!</div>
+    <div class="header-right">
+      <a href="{{ url_for('user_home') }}">← BACK TO DASHBOARD</a>
+    </div>
+  </div>
+
+  <div class="signup-box">
+    <form method="POST" >
+      <div class="mb-3">
+        <label>SPOT ID:</label>
+        <input type="text" value="{{ booking.spot.id }}" readonly><br>
+      </div>
+
+      <div class="mb-3">
+        <label>VEHICLE NUMBER:</label>
+        <input type="text" value="{{ booking.vehicle_number }}" readonly><br>
+      </div>
+
+      <div class="mb-3">
+        <label>PARKING TIME:</label>
+        <input type="text" value="{{ booking.start_time.strftime('%Y-%m-%d %H:%M:%S') }}" readonly><br>
+      </div>
+
+      <div class="mb-3">
+        <label>RELEASE TIME:</label>
+        <input type="text" value="{{ release_time.strftime('%Y-%m-%d %H:%M:%S') }}" readonly><br>
+      </div>
+
+      <div class="mb-3">
+        <label>TOTAL COST:</label>
+        <input type="text" value="Rs. {{ total_cost }}" readonly><br>
+      </div>
+
+      <button type="submit" class="btn btn-danger" a href="{{ url_for('release_booking', booking_id=booking.id) }}">RELEASE</button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
+  
+
+
+ 

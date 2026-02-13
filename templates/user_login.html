@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='login_user.css')}}">
+</head>
+<body>
+
+  <div class="header">
+    <div>WELCOME TO USER LOGIN PAGE!</div>
+    <div class="register-link">DON'T HAVE AN ACCOUNT? <a href="{{ url_for('signup') }}">REGISTER HERE !</a></div>
+  </div>
+
+  <div class="login-box">
+    <h3>LOGIN</h3>
+    <form method="POST">
+      <div class="mb-4">
+        <label for="username">USERNAME :</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="mb-4">
+        <label for="password">PASSWORD :</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-login">LOGIN</button>
+    </form>
+  </div>
+
+</body>
+</html>

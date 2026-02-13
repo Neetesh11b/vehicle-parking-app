@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Edit Parking Lot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">EDIT PARKING LOT AREA!</div>
+    <div class="header-right">
+      <a href="{{ url_for('admin_home') }}">← BACK TO DASHBOARD</a>
+    </div>
+  </div>
+
+  <div class="signup-box">
+    <form method="POST" action="{{ url_for('edit_lot', lot_id=lot.id) }}">
+
+      <div class="mb-3">
+        <label for="prime_locationname">PRIME LOCATION NAME:</label>
+        <input type="text" class="form-control" id="prime_locationname" name="prime_locationname" value="{{ lot.prime_locationname }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="address">ADDRESS:</label>
+        <input type="text" class="form-control" id="address" name="address" value="{{ lot.address }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="pin_code">PIN CODE:</label>
+        <input type="text" class="form-control" id="pin_code" name="pin_code" value="{{ lot.pin_code }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="price">PRICE (PER HOUR):</label>
+        <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ lot.price }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="number_of_spots">NUMBER OF SPOTS:</label>
+        <input type="number" class="form-control" id="number_of_spots" name="number_of_spots" value="{{ lot.number_of_spots }}" required>
+      </div>
+
+      <button type="submit" class="btn btn-signup">EDIT LOT</button>
+    </form>
+  </div>
+
+</body>
+</html>

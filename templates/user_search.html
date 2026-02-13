@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Parking Lot</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="{{ url_for('static', filename='user_search.css') }}" />
+</head>
+<body>
+
+  <div class="navbar">
+    <div>
+      <a href="{{ url_for('user_home') }}">HOME</a> |
+      <a href="{{ url_for('user_search') }}">SEARCH</a> |
+      <a href="{{ url_for('user_summary') }}">SUMMARY</a> |
+      <a href="{{ url_for('logout') }}">LOGOUT</a>
+    </div>
+    <div>
+      <a href="{{ url_for('user_edit') }}"><em>EDIT PROFILE</em></a>
+    </div>
+  </div>
+
+  <div class="welcome">WELCOME, USER SIR !</div>
+
+  <div class="dropdown-section">
+    <form method="POST" action="{{ url_for('user_search') }}">
+      <select name="search_type">
+        <option value="address">Search by Address</option>
+        <option value="pincode">Search by PINCODE</option>
+      </select>
+      <input type="text"  name="search_query" placeholder="ENTER THE VALUE!" required>
+      <button class="search-btn" type="submit">SEARCH</button>
+    </form>
+  </div>
+
+  <div class="container table-container">
+    <table class="table table-bordered mt-4">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ADDRESS</th>
+          <th>AVAILABLE SPOTS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if results %}
+          {% for lot in results %}
+          <tr>
+            <td>{{ lot.id }}</td>
+            <td><strong>{{ lot.address }}</strong></td>
+            <td>{{ lot.available_spots }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('book_parking', lot_id=lot.id) }}">
+                <button class="btn btn-book">BOOK</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4">NO RESULT FOUND!</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

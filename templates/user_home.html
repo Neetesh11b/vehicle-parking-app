@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="{{ url_for('static', filename='user_home.css') }}">
+</head>
+<body>
+
+  <div class="navbar">
+    <div>
+      <a href="{{ url_for('user_home') }}">HOME</a> |
+      <a href="{{ url_for('user_search') }}">SEARCH</a> |
+      <a href="{{ url_for('user_summary') }}">SUMMARY</a> |
+      <a href="{{ url_for('logout') }}">LOGOUT</a>
+    </div>
+    <div>
+      <a href="{{ url_for('user_edit') }}"><em>EDIT PROFILE</em></a>
+    </div>
+  </div>
+
+  <div class="welcome">WELCOME, USER SIR !</div>
+
+<h2 class="heading text-center">CURRENT PARKING DETAILS</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>VEHICLE NO.</th>
+      <th>LOCATION</th>
+      <th>TIMESTAMP</th>
+      <th>ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if active_bookings %}
+      {% for booking in active_bookings %}
+        <tr>
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.vehicle_number }}</td>
+          <td>{{ booking.spot.parking.pin_code }}</td>
+          <td>{{ booking.start_time.strftime('%d-%b-%Y %H:%M') }}</td>
+          <td>
+            <form action="{{ url_for('release_form', booking_id=booking.id) }}" method="GET">
+              <button type="submit" class="btn btn-success">RELEASE</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="5" class="text-center text-warning">NO ACTIVE BOOKINGS</td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+
+<h2 class="heading text-center mt-5">PARKED OUT HISTORY</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>VEHICLE NO.</th>
+      <th>LOCATION</th>
+      <th>BOOKING TIME</th>
+      <th>STATUS</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if released_bookings %}
+      {% for booking in released_bookings %}
+        <tr>
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.vehicle_number }}</td>
+          <td>{{ booking.spot.parking.pin_code }}</td>
+          <td>{{ booking.end_time.strftime('%d-%b-%Y %H:%M') }}</td>
+          <td><button class="btn btn-secondary" disabled>PARKED OUT</button></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="5" class="text-center text-info">NO RELEASED BOOKINGS</td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+</body>
+</html>
